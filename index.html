@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ymmo - Gestion des Biens</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Gestion des biens immobiliers</h1>
+
+    <div class="table-container">
+        <h3>Estimer mon bien</h3>
+        <div class="estimation-form">
+            <input type="number" id="surfaceInput" placeholder="Surface (m²)">
+            <button onclick="estimer()">Calculer</button>
+        </div>
+        <p id="resultatEst"></p>
+    </div>
+
+    <div class="table-container">
+        <div class="main-table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Titre</th>
+                        <th>Ville</th>
+                        <th>Type</th>
+                        <th>Prix</th>
+                    </tr>
+                </thead>
+                <tbody id="biens-list">
+                    </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // ... Ton code JavaScript existant (il ne change pas) ...
+        // Fonction pour l'estimation
+        function estimer() {
+            const surface = document.getElementById('surfaceInput').value;
+            if (!surface) return alert("Veuillez entrer une surface.");
+            
+            fetch(`http://10.0.0.10:5000/estimer?surface=${surface}`)
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('resultatEst').innerText = 
+                        "Prix estimé pour " + data.surface + " m² : " + 
+                        data.prix_estime.toLocaleString() + " €";
+                })
+                .catch(err => console.error("Erreur estimation :", err));
+        }
+
+        // Chargement initial de la liste des biens
+        fetch('http://10.0.0.10:5000/biens')
+            .then(res => res.json())
+            .then(data => {
+                const list = document.getElementById('biens-list');
+                list.innerHTML = '';
+                const tableauBiens = data.biens || data;
+
+                tableauBiens.forEach(bien => {
+                    list.innerHTML += `<tr>
+                        <td>${bien.titre || 'N/A'}</td>
+                        <td>${bien.ville || 'N/A'}</td>
+                        <td>${bien.type_bien || 'N/A'}</td>
+                        <td>${bien.prix ? bien.prix.toLocaleString() + ' €' : '0 €'}</td>
+                    </tr>`;
+                });
+            })
+            .catch(err => console.error("Erreur chargement biens :", err));
+    </script>
+
+</body>
+</html>

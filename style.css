@@ -1,0 +1,170 @@
+/* style.css - Version Design Professionnel pour Ymmo */
+
+/* --- 1. Variables de Couleur & Fondamentaux --- */
+:root {
+    --primary-color: #3498db;    /* Bleu Ymmo */
+    --primary-dark: #2980b9;     /* Bleu foncé pour hover */
+    --bg-color: #f4f7f6;         /* Gris très clair pour le fond */
+    --card-bg: #ffffff;          /* Blanc pour les conteneurs */
+    --text-main: #2c3e50;        /* Gris foncé pour le texte */
+    --text-light: #7f8c8d;       /* Gris clair pour sous-titres */
+    --border-color: #e0e0e0;     /* Gris pour bordures discrètes */
+    --shadow-main: 0 4px 6px rgba(0,0,0,0.07); /* Ombre douce */
+    --shadow-hover: 0 8px 15px rgba(0,0,0,0.1); /* Ombre au survol */
+}
+
+body { 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    padding: 30px; 
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    margin: 0;
+}
+
+/* --- 2. En-têtes (Titres) --- */
+h1 { 
+    text-align: center; 
+    color: var(--text-main); 
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    font-weight: 700;
+}
+
+h3 { 
+    color: var(--text-main); 
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-weight: 600;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 8px;
+    display: inline-block;
+}
+
+/* --- 3. Conteneurs Universels (Cards) --- */
+.table-container {
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: 12px; /* Coins plus arrondis */
+    box-shadow: var(--shadow-main);
+    transition: box-shadow 0.3s ease; /* Transition douce pour l'ombre */
+    margin-bottom: 30px;
+}
+
+.table-container:hover {
+    box-shadow: var(--shadow-hover); /* Ombre plus forte au survol */
+}
+
+/* --- 4. Style du Tableau --- */
+.main-table-wrapper {
+    overflow-x: auto; /* Scroll horizontal sur mobile */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th, td {
+    padding: 15px 20px;
+    text-align: left;
+}
+
+/* Style de l'en-tête du tableau */
+th { 
+    background-color: var(--primary-color); 
+    color: white; 
+    font-weight: 600;
+    text-transform: uppercase; /* Texte en majuscules */
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+/* Bordures discrètes entre les lignes */
+tr {
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Dernière ligne sans bordure */
+tr:last-child {
+    border-bottom: none;
+}
+
+/* Effet au survol d'une ligne */
+tr:hover { 
+    background-color: #fbfdff; 
+}
+
+/* --- 5. Style du Formulaire d'Estimation --- */
+.estimation-form {
+    display: flex; 
+    gap: 15px; 
+    align-items: center;
+    flex-wrap: wrap; /* S'adapte si l'écran est petit */
+}
+
+/* Input Numérique */
+input[type="number"] {
+    padding: 12px 15px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    width: 200px;
+    transition: border-color 0.3s ease;
+}
+
+input[type="number"]:focus {
+    outline: none;
+    border-color: var(--primary-color); /* Bordure bleue quand cliqué */
+}
+
+/* Bouton Calculer */
+button {
+    padding: 12px 25px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+button:hover {
+    background-color: var(--primary-dark); /* Plus foncé au survol */
+}
+
+button:active {
+    transform: translateY(1px); /* Petit effet d'enfoncement cliqué */
+}
+
+/* Texte de résultat */
+#resultatEst { 
+    margin-top: 20px; 
+    font-weight: 700; 
+    color: var(--primary-dark); 
+    font-size: 1.1rem;
+    background-color: #e8f4fd;
+    padding: 10px 15px;
+    border-radius: 6px;
+    display: inline-block;
+}
+
+/* --- 6. Responsive : Adaptation petit écran --- */
+@media screen and (max-width: 600px) {
+    body { padding: 15px; }
+    
+    h1 { font-size: 2rem; margin-bottom: 25px; }
+    
+    th, td { font-size: 14px; padding: 10px; }
+    
+    .estimation-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    input[type="number"] {
+        width: 100%;
+    }
+}
